@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MyEdit</string>
+    <string name="menu_action_clear">Clear</string>
+    <string name="menu_action_settings">Settings</string>
+    <string name="menu_action_save">Save</string>
+    <string name="menu_action_open">Open</string>
+
+    <string name="pref_open_mode">Open mode</string>
+    <string name="pref_color">Color</string>
+    <string name="pref_color_black">Black color</string>
+    <string name="pref_color_red">Red color</string>
+    <string name="pref_color_green">Green color</string>
+    <string name="pref_color_blue">Blue color</string>
+
+    <string name="pref_size">Size</string>
+    <string name="pref_style">Style</string>
+    <string name="pref_style_regular">Regular</string>
+    <string name="pref_style_bold">Bold</string>
+    <string name="pref_style_italic">Italic</string>
+    <string name="title_activity_settings">Settings</string>
+
+</resources>

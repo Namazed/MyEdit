@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Работа со шрифтами">
+        <CheckBoxPreference
+            android:enabled="false"
+            android:key="@string/pref_open_mode"
+            android:summary="Открыть файл при запуске приложения"
+            android:title="Открыть" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Настройки шрифтов">
+        <EditTextPreference
+            android:defaultValue="14"
+            android:dialogTitle="Введите размер шрифта от 10 до 30"
+            android:key="@string/pref_size"
+            android:summary="Устанавливает новый размер шрифта"
+            android:title="Размер шрифта" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="Выберите стиль для шрифта"
+            android:entries="@array/text_style"
+            android:entryValues="@array/text_style"
+            android:key="@string/pref_style"
+            android:summary="Устанавливает стиль для шрифта"
+            android:title="Стиль для шрифта" />
+
+        <PreferenceScreen
+            android:key="@string/pref_color"
+            android:summary="Устанавливает цвет для текста"
+            android:title="Цвет текста">
+
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_color_black"
+                android:summary="Устанавливает черный цвет"
+                android:title="Черный" />
+
+            <CheckBoxPreference
+                android:key="@string/pref_color_red"
+                android:summary="Устанавливает красный цвет"
+                android:title="Красный" />
+
+            <CheckBoxPreference
+                android:key="@string/pref_color_green"
+                android:summary="Устанавливает зеленый цвет"
+                android:title="Зеленый" />
+
+            <CheckBoxPreference
+                android:key="@string/pref_color_blue"
+                android:summary="Устанавливает синий цвет"
+                android:title="Синий" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>
