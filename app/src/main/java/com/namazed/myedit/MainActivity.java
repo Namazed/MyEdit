@@ -23,7 +23,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    final EditText INPUT = new EditText(this);
+    private final EditText INPUT_2 = new EditText(this);
+    private final EditText INPUT = new EditText(this);
     public EditText editText;
     public String fileName = null;
     private String path = Environment.
@@ -116,11 +117,29 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_save:
                 //TODO Здесь тоже AlertDialog
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Имя файла");
+                alert.setMessage("Введите имя файла для сохранения");
+                alert.setView(INPUT_2);
+                alert.setPositiveButton("Сохранить", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String value = INPUT_2.getText().toString();
+                        fileName = value;
+                        saveFile(fileName, editText.getText().toString());
+                    }
+                });
+                alert.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "Вы нажали Отмена!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return true;
             case R.id.action_settings:
                 Intent intentSettings =
                         new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intentSettings);
-                //break;
         }
         return super.onOptionsItemSelected(item);
     }
