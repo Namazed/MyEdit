@@ -48,7 +48,7 @@ public class MainController extends MvpController<MainController, MainPresenter>
     @Override
     protected void onActivityResumed(Activity activity) {
         super.onActivityResumed(activity);
-
+        // TODO: 12.10.2016 не работает выбор и сохранение настроек
         //Setting size for EditText
 //        mainFieldEditText.setTextSize(getPresenter().changeSettingsText(getActivity()
 //                .getString(R.string.pref_size)));
