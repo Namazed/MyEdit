@@ -48,18 +48,17 @@ public class MainController extends MvpController<MainController, MainPresenter>
     @Override
     protected void onActivityResumed(Activity activity) {
         super.onActivityResumed(activity);
-        // TODO: 12.10.2016 не работает выбор и сохранение настроек
         //Setting size for EditText
-//        mainFieldEditText.setTextSize(getPresenter().changeSettingsText(getActivity()
-//                .getString(R.string.pref_size)));
+        mainFieldEditText.setTextSize(getPresenter().changeSettingsText(getActivity()
+                .getString(R.string.pref_size)));
 
         //Setting style for EditText
         mainFieldEditText.setTypeface(null, (int) getPresenter().changeSettingsText(getActivity()
                 .getString(R.string.pref_style)));
 
         //Setting color for EditText
-//        mainFieldEditText.setTextColor((int) getPresenter().changeSettingsText(getActivity()
-//                .getString(R.string.pref_color)));
+        mainFieldEditText.setTextColor((int) getPresenter().changeSettingsText(getActivity()
+                .getString(R.string.pref_color)));
     }
 
     @Override

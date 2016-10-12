@@ -1,8 +1,8 @@
 package com.namazed.myedit.input_text;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Environment;
+import android.support.v4.content.res.ResourcesCompat;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.namazed.myedit.R;
@@ -51,7 +51,7 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
     }
 
      float changeSettingsText(String setting) {
-         if (isViewAttached() || getView() == null) {
+         if (!isViewAttached() || getView() == null) {
              return 0;
          }
         switch (setting) {
@@ -64,18 +64,22 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
                 if (editTextStyle.contains("Italic")) typeface += Typeface.ITALIC;
                 return typeface;
             case PreferenceDataManager.PREF_TEXT_COLOR:
-                int colorEditText = Color.BLACK;
+                int colorEditText = ResourcesCompat.getColor(getView().getResources(),
+                        R.color.black, null);
                 if (preferenceDataManager.whatColor(getView().getMyEditContext()
                         .getString(R.string.pref_color_red))) {
-                    colorEditText += Color.RED;
+                    colorEditText += ResourcesCompat.getColor(getView().getResources(),
+                            R.color.red, null);
                 }
                 if (preferenceDataManager.whatColor(getView().getMyEditContext()
                         .getString(R.string.pref_color_green))) {
-                    colorEditText += Color.GREEN;
+                    colorEditText += ResourcesCompat.getColor(getView().getResources(),
+                            R.color.green, null);
                 }
                 if (preferenceDataManager.whatColor(getView().getMyEditContext()
-                        .getString(R.string.pref_color_green))) {
-                    colorEditText += Color.BLUE;
+                        .getString(R.string.pref_color_blue))) {
+                    colorEditText += ResourcesCompat.getColor(getView().getResources(),
+                            R.color.blue, null);
                 }
                 return colorEditText;
                 default:
