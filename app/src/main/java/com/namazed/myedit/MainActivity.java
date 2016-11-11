@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import com.bluelinelabs.conductor.Conductor;
 import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
-import com.namazed.myedit.input_text.MainController;
+import com.namazed.myedit.main_screen.MainController;
 
 public class MainActivity extends AppCompatActivity {
 
