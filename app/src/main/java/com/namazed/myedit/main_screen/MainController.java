@@ -64,7 +64,7 @@ public class MainController extends MvpController<MainController, MainPresenter>
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_clear:
-                getPresenter().workingWithFile(IdMenu.CLEAR.getId());
+                getPresenter().workingWithFile(IdMenu.CLEAR);
                 return true;
             case R.id.action_open:
                 getPresenter().createDialog(

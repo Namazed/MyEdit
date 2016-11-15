@@ -29,20 +29,20 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
         this.preferenceDataManager = preferenceDataManager;
     }
 
-    void workingWithFile(int idAction, String... file) {
+    void workingWithFile(IdMenu idMenu, String... file) {
         if (!isViewAttached() || getView() == null) {
             return;
         }
 
         String pathInternal = getView().getMyEditContext().getFilesDir().toString() + MY_DIR;
 
-        switch (idAction) {
-            case 0:
+        switch (idMenu) {
+            case CLEAR:
                 getView().clearFieldWithText();
                 getView().actionOverFileSuccessful(getView().getMyEditContext()
                         .getString(R.string.toast_clear));
                 break;
-            case 1:
+            case OPEN:
                 if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     File myFile = new File(pathInternal + file[0] + FORMAT_FILE);
                     if (myFile.exists() && !myFile.isDirectory()) {
@@ -63,7 +63,7 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
                     }
                 }
                 break;
-            case 2:
+            case SAVE:
                 if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     operation.saveFile(file[0], file[1], getView().getMyEditContext());
                     getView().actionOverFileSuccessful(getView().getMyEditContext()
@@ -132,11 +132,11 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
     void chooseDialog(String modeDialog, String textDialog, String body) {
         switch (modeDialog) {
             case OPEN_MODE_DIALOG:
-                workingWithFile(IdMenu.CLEAR.getId());
-                workingWithFile(IdMenu.OPEN.getId(), textDialog);
+                workingWithFile(IdMenu.CLEAR);
+                workingWithFile(IdMenu.OPEN, textDialog);
                 break;
             case SAVE_MODE_DIALOG:
-                workingWithFile(IdMenu.SAVE.getId(), textDialog, body);
+                workingWithFile(IdMenu.SAVE, textDialog, body);
                 break;
         }
     }
