@@ -9,3 +9,8 @@
 app/libs/
 app/src/main/res/drawable/
 projectFilesBackup/
+/gradle.properties
+/gradle/
+/gradlew
+/gradlew.bat
+/settings.gradle

@@ -1,5 +1,6 @@
 package com.namazed.myedit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
@@ -24,5 +25,10 @@ public class MainActivity extends AppCompatActivity {
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(new MainController()));
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        router.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,7 +1,7 @@
 package com.namazed.myedit.main_screen;
 
 import android.graphics.Typeface;
-import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
@@ -9,19 +9,9 @@ import com.namazed.myedit.R;
 import com.namazed.myedit.data.OperationOnFile;
 import com.namazed.myedit.data.PreferenceDataManager;
 
-import java.io.File;
+import java.io.InputStream;
 
 public class MainPresenter extends MvpBasePresenter<MainController> {
-
-
-    private static final String OPEN_MODE_DIALOG = "Open";
-    private static final String SAVE_MODE_DIALOG = "Save";
-    public static final String MY_DIR = "/MyEdit/";
-    private static final String PATH_EXTERNAL = Environment.
-            getExternalStorageDirectory().getAbsolutePath() + MY_DIR;
-    public static final String FORMAT_FILE = ".txt";
-
-
     private OperationOnFile operation = new OperationOnFile();
     private final PreferenceDataManager preferenceDataManager;
 
@@ -29,12 +19,10 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
         this.preferenceDataManager = preferenceDataManager;
     }
 
-    void workingWithFile(IdMenu idMenu, String... file) {
+    void workingWithFile(IdMenu idMenu, @Nullable InputStream inputStream, String... file) {
         if (!isViewAttached() || getView() == null) {
             return;
         }
-
-        String pathInternal = getView().getMyEditContext().getFilesDir().toString() + MY_DIR;
 
         switch (idMenu) {
             case CLEAR:
@@ -43,36 +31,18 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
                         .getString(R.string.toast_clear));
                 break;
             case OPEN:
-                if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                    File myFile = new File(pathInternal + file[0] + FORMAT_FILE);
-                    if (myFile.exists() && !myFile.isDirectory()) {
-                        String textOut = operation.openFile(file[0]);
-                        getView().setTextFromFile(textOut);
-                    } else {
-                        getView().showFileError(getView().getMyEditContext()
-                                .getString(R.string.toast_error_find_file));
-                    }
+                String textOut = operation.openFileSd(inputStream);
+                if (textOut == null) {
+                    getView().showFileError(getView().getMyEditContext()
+                            .getString(R.string.toast_error_find_file));
                 } else {
-                    File myFile = new File(PATH_EXTERNAL + file[0] + FORMAT_FILE);
-                    if (myFile.exists() && !myFile.isDirectory()) {
-                        String textOut = operation.openFileSd(file[0]);
-                        getView().setTextFromFile(textOut);
-                    } else {
-                        getView().showFileError(getView().getMyEditContext()
-                                .getString(R.string.toast_error_find_file));
-                    }
+                    getView().setTextFromFile(textOut);
                 }
                 break;
             case SAVE:
-                if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                    operation.saveFile(file[0], file[1], getView().getMyEditContext());
-                    getView().actionOverFileSuccessful(getView().getMyEditContext()
-                            .getString(R.string.toast_save));
-                } else {
-                    operation.saveFileSd(file[0], file[1]);
-                    getView().actionOverFileSuccessful(getView().getMyEditContext()
-                            .getString(R.string.toast_save));
-                }
+                operation.saveFileSd(file[0], file[1]);
+                getView().actionOverFileSuccessful(getView().getMyEditContext()
+                        .getString(R.string.toast_save));
                 break;
             default:
                 break;
@@ -80,6 +50,7 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
     }
 
     float changeSettingsText(String setting) {
+        // TODO: 01.01.2017 Изменить данный метод, т.к. presenter не должен возвращать, что либо кроме void.
         if (!isViewAttached() || getView() == null) {
             return 0;
         }
@@ -122,22 +93,11 @@ public class MainPresenter extends MvpBasePresenter<MainController> {
         }
     }
 
-    void createDialog(String... dialog) {
+    void tryOpeningFile() {
         if (!isViewAttached() || getView() == null) {
             return;
         }
-        getView().showDialog(dialog[0], dialog[1], dialog[2], dialog[3]);
-    }
 
-    void chooseDialog(String modeDialog, String textDialog, String body) {
-        switch (modeDialog) {
-            case OPEN_MODE_DIALOG:
-                workingWithFile(IdMenu.CLEAR);
-                workingWithFile(IdMenu.OPEN, textDialog);
-                break;
-            case SAVE_MODE_DIALOG:
-                workingWithFile(IdMenu.SAVE, textDialog, body);
-                break;
-        }
+        getView().showDirectoriesWithFiles();
     }
 }
