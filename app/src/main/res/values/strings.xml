@@ -19,4 +19,13 @@
     <string name="pref_style_italic">Italic</string>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="dialog_title">File name</string>
+    <string name="dialog_message_open">Input file name for open</string>
+    <string name="dialog_message_save">Input file name for save</string>
+    <string name="dialog_name_positive_button_open">Open</string>
+    <string name="dialog_name_positive_button_save">Save</string>
+
+    <string name="toast_save">Saved!</string>
+    <string name="toast_clear">Cleared!</string>
+    <string name="toast_error_find_file">File is not found!</string>
 </resources>
