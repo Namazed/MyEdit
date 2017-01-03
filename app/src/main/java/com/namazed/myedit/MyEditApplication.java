@@ -9,6 +9,8 @@ import com.namazed.myedit.data.PreferenceDataManager;
 
 public class MyEditApplication extends Application {
 
+    public final static int PERMISSION_EXTERNAL = 100;
+
     private SharedPreferences preferences;
     private PreferenceDataManager preferenceDataManager;
 
